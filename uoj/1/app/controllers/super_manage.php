@@ -19,16 +19,36 @@
 		},
 		null
 	);
+	$user_form->addDefaultHiddenInput('school', 'text', '学校', '',
+		function ($school) {
+			return '';
+		}
+	, null);
+	$user_form->addDefaultHiddenInput('grade', 'text', '年级', '',
+		function ($grade) {
+			return '';
+		}
+	, null);
+	$user_form->addDefaultHiddenInput('realName', 'text', '姓名', '',
+		function ($realName) {
+			return '';
+		}
+	, null);
 	$options = array(
 		'banneduser' => '设为封禁用户',
 		'normaluser' => '设为普通用户',
-		'superuser' => '设为超级用户'
+		'superuser' => '设为超级用户',
+		'setUserInfo' => '设置用户信息'
 	);
 	$user_form->addSelect('op-type', $options, '操作类型', '');
 	$user_form->handle = function() {
 		global $user_form;
 		
 		$username = $_POST['username'];
+		$school = $_POST['school'];
+		$grade = $_POST['grade'];
+		$realName = $_POST['realName'];
+
 		switch ($_POST['op-type']) {
 			case 'banneduser':
 				DB::update("update user_info set usergroup = 'B' where username = '{$username}'");
@@ -38,6 +58,9 @@
 				break;
 			case 'superuser':
 				DB::update("update user_info set usergroup = 'S' where username = '{$username}'");
+				break;
+			case 'setUserInfo':
+				DB::update("update user_info set school = '{$school}',grade = '{$grade}',real_name = '{$realName}' where username = '{$username}'");
 				break;
 		}
 	};
@@ -271,6 +294,30 @@ EOD;
 	<div class="col-sm-9">
 		<?php if ($cur_tab === 'users'): ?>
 			<?php $user_form->printHTML(); ?>
+			<script type="text/javascript">
+			$(document).ready(
+				function() {
+				$("#input-content-op-type").change(
+					function() {
+							var val = $("#input-content-op-type").get(0).selectedIndex;
+							if(val == 3){
+								if($("#div-school").is(":hidden") && $("#div-grade").is(":hidden") && $("#div-realName").is(":hidden")){
+									$("#div-school").show(400);
+									$("#div-grade").show(400);
+									$("#div-realName").show(400);
+								}
+							}else{
+								if(!($("#div-school").is(":hidden")) && !($("#div-grade").is(":hidden")) && !($("#div-realName").is(":hidden"))) {
+									$("#div-school").hide(400);
+									$("#div-grade").hide(400);
+									$("#div-realName").hide(400);
+								}
+							}
+						}
+					);
+				}
+			);
+			</script>
 			<h3>封禁名单</h3>
 			<?php echoLongTable($banlist_cols, 'user_info', "usergroup='B'", '', $banlist_header_row, $banlist_print_row, $banlist_config) ?>
 		<?php elseif ($cur_tab === 'blogs'): ?>

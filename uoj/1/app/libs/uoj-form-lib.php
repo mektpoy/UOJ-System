@@ -110,13 +110,26 @@ EOD;
 EOD;
 			$this->add($name, $html, $validator_php, $validator_js);
 		}
+		public function addDefaultHiddenInput($name, $type, $label_text, $default_value, $validator_php, $validator_js) {
+			$default_value = htmlspecialchars($default_value);
+			$html = <<<EOD
+<div id="div-$name" class="form-group" style="display:none">
+	<label for="input-$name" class="col-sm-2 control-label">$label_text</label>
+	<div class="col-sm-3">
+		<input type="$type" class="form-control" name="$name" id="input-$name" value="$default_value" />
+		<span class="help-block" id="help-$name"></span>
+	</div>
+</div>
+EOD;
+            $this->add($name, $html, $validator_php, $validator_js);
+        }
 		public function addSelect($name, $options, $label_text, $default_value) {
 			$default_value = htmlspecialchars($default_value);
 			$html = <<<EOD
 <div id="div-$name" class="form-group">
 	<label for="input-$name" class="col-sm-2 control-label">$label_text</label>
 	<div class="col-sm-3">
-		<select class="form-control" id="input-content" name="$name">
+		<select class="form-control" id="input-content-$name" name="$name">
 
 EOD;
 			foreach ($options as $opt_name => $opt_label) {
