@@ -24,6 +24,7 @@ return [
 	'QQ' => 'QQ',
 	'sex' => '性别',
 	'motto' => '格言',
+	'real_name' => '姓名',
 	'rating' => 'Rating',
 	'view all' => '查看全部',
 	'appraisal' => '评价',

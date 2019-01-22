@@ -21,13 +21,15 @@ function blog_editor_init(name, editor_config) {
 	var preview_btn = $('<button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-eye-open"></span></button>');
 	var bold_btn = $('<button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-bold"></span></button>');
 	var italic_btn = $('<button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-italic"></span></button>');
-	
+	var upload_picture_btn = $('<button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-picture"></span></button>');
+
 	save_btn.tooltip({ container: 'body', title: '保存 (Ctrl-S)' });
 	preview_btn.tooltip({ container: 'body', title: '预览 (Ctrl-D)' 	});
 	bold_btn.tooltip({ container: 'body', title: '粗体 (Ctrl-B)' });
 	italic_btn.tooltip({ container: 'body', title: '斜体 (Ctrl-I)' });
+	upload_picture_btn.tooltip({ container : 'body', title: '上传图片'});
 	
-	var all_btn = [save_btn, preview_btn, bold_btn, italic_btn];
+	var all_btn = [save_btn, preview_btn, bold_btn, italic_btn, upload_picture_btn];
 	
 	// init toolbar
 	var toolbar = $('<div class="btn-toolbar"></div>');
@@ -38,6 +40,9 @@ function blog_editor_init(name, editor_config) {
 	toolbar.append($('<div class="btn-group"></div>')
 		.append(bold_btn)
 		.append(italic_btn)
+	);
+	toolbar.append($('<div class="btn-group"></div>')
+		.append(upload_picture_btn)
 	);
 	
 	function set_saved(val) {
@@ -248,6 +253,56 @@ function blog_editor_init(name, editor_config) {
 	italic_btn.click(function() {
 		add_around("*", "*");
 		codeeditor.focus();
+	});
+	upload_picture_btn.click(function() {
+		BootstrapDialog.show({
+			title: '上传图片',
+			message: '<form id = "upload-form" enctype="multipart/form-data"><input type="file" name="upload_picture" id="upload_picture"></form>',
+			buttons: [{
+				id: 'btn-1',
+				label: '上传图片',
+				action: function(dialog) {
+					var upload_form = new FormData($("#upload-form")[0]);
+					$.ajax({
+						url: "/upload",
+						type: "post",
+						data: upload_form,
+						processData:false,
+						contentType:false,
+						success:function(data){
+							dialog.close();
+							if(/^Error/.test(data)) {
+								BootstrapDialog.show({
+									title: '上传图片',
+									message: '上传失败！',
+									type: BootstrapDialog.TYPE_DANGER,
+									buttons: [{
+										label: '好的',
+										action: function(dialog) {
+											dialog.close();
+										}
+									}]
+								});
+							}else{
+								BootstrapDialog.show({
+									title: '上传图片',
+									message: '上传成功！文件名为' + data,
+									type: BootstrapDialog.TYPE_SUCCESS,
+									buttons: [{
+										label: '好的',
+										action: function(dialog) {
+											dialog.close();
+										}
+									}]
+								});
+								add_around("![","](/files/upload/" + data + ")");
+								codeeditor.focus();
+							}
+						}
+					});
+				}
+			}]
+		});
 	});
 	input_is_hidden.on('switchChange.bootstrapSwitch', function(e, state) {
 		var ok = true;

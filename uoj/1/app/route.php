@@ -59,6 +59,8 @@ Route::group([
 		
 		Route::any('/download.php', '/download.php');
 		
+		Route::any('/upload','/upload.php');
+		
 		Route::any('/click-zan', '/click_zan.php');
 	}
 );

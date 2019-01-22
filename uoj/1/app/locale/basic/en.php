@@ -24,6 +24,7 @@ return [
 	'QQ' => 'QQ',
 	'sex' => 'Sex',
 	'motto' => 'Motto',
+	'real_name' => 'name',
 	'rating' => 'Rating',
 	'view all' => 'View all',
 	'appraisal' => 'Appraisal',

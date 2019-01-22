@@ -23,6 +23,7 @@ class UOJBlogEditor {
 	function __construct() {
 		global $REQUIRE_LIB;
 		$REQUIRE_LIB['blog-editor'] = '';
+    	$REQUIRE_LIB['dialog'] = '';
 		
 		$this->validator = array(
 			'title' => function(&$title) {
