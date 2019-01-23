@@ -6,9 +6,9 @@
 	if (isSuperUser($myUser)) {
 		$new_problem_form = new UOJForm('new_problem');
 		$new_problem_form->handle = function() {
-			DB::query("insert into problems (title, is_hidden, submission_requirement) values ('New Problem', 1, '{}')");
+			DB::query("insert into problems (title, is_hidden, submission_requirement, hackable) values ('New Problem', 1, '{}', 0)");
 			$id = DB::insert_id();
-			DB::query("insert into problems_contents (id, statement, statement_md) values ($id, '', '')");
+			DB::query("insert into problems_contents (id, statement, statement_md) values ($id, '', '##描述\n\n##输入格式\n\n##输出格式\n\n##样例一\n\n###input\n\t\n###output\n\t\n\n##限制与约定\n\n**时间限制：**\n\n**空间限制：**')");
 			svnNewProblem($id);
 		};
 		$new_problem_form->submit_button_config['align'] = 'right';

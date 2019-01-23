@@ -22,6 +22,8 @@
 			$col_sex="color:black";
 		}
 		$esc_motto = HTML::escape($user['motto']);
+		$esc_school = HTML::escape($user['school']);
+		$esc_real_name = HTML::escape($user['real_name']);
 	?>
 	<div class="panel panel-info">
 		<div class="panel-heading">
@@ -50,6 +52,14 @@
 						<div class="list-group-item">
 							<h4 class="list-group-item-heading"><?= UOJLocale::get('motto') ?></h4>
 							<p class="list-group-item-text"><?= $esc_motto ?></p>
+						</div>
+						<div class="list-group-item">
+							<h4 class="list-group-item-heading"><?= UOJLocale::get('school') ?></h4>
+							<p class="list-group-item-text"><?= $esc_school ?></p>
+						</div>
+						<div class="list-group-item">
+							<h4 class="list-group-item-heading"><?= UOJLocale::get('real_name') ?></h4>
+							<p class="list-group-item-text"><?= $esc_real_name ?></p>
 						</div>
 						<?php if (isSuperUser($myUser)): ?>
 						<div class="list-group-item">
