@@ -961,10 +961,10 @@ function echoRanklist($config = array()) {
 	}
 	
 	$config['get_row_index'] = '';
-	echoLongTable($col_names, 'user_info', '1', $tail, $header_row, $print_row, $config);
+	echoLongTable($col_names, 'user_info', 'real_name != "" and rating != 1500', $tail, $header_row, $print_row, $config);
 }
 
-/*function echoacRanklist($config = array()) {
+function echoACRanklist($config = array()) {
 	$header_row = '';
 	$header_row .= '<tr>';
 	$header_row .= '<th style="width: 5em;">#</th>';
@@ -996,7 +996,7 @@ function echoRanklist($config = array()) {
 		
 		$users[] = $user;
 	};
-	$col_names = array('username', 'ac_num', 'motto', 'real_name');
+	$col_names = array('username', 'ac_num', 'motto', 'real_name', 'rating');
 	$tail = 'order by ac_num desc, username asc';
 	
 	if (isset($config['top10'])) {
@@ -1004,5 +1004,5 @@ function echoRanklist($config = array()) {
 	}
 	
 	$config['get_row_index'] = '';
-	echoLongTable($col_names, 'user_info', '1', $tail, $header_row, $print_row, $config);
-}*/
+	echoLongTable($col_names, 'user_info', 'rating > 0', $tail, $header_row, $print_row, $config);
+}

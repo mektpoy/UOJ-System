@@ -80,15 +80,7 @@
 			
 			$user = queryUser($contest['username']);
 			$user_link = getUserLink($contest['username'], $contest['user_rating']);
-			if (!$show_ip) {
-				echo '<tr>';
-			} else {
-				if ($ip_owner[$user['remote_addr']] != $user['username']) {
-					echo '<tr class="danger">';
-				} else {
-					echo '<tr>';
-				}
-			}
+			echo '<tr>';
 			echo '<td>'.$num.'</td>';
 			echo '<td>'.$user_link.'</td>';
 			if ($show_ip) {

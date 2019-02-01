@@ -25,6 +25,8 @@ return [
 	'sex' => 'Sex',
 	'motto' => 'Motto',
 	'real_name' => 'name',
+	'ranklist' => 'Ranklist',
+	'acranklist' => 'AC Ranklist',
 	'school' => 'school',
 	'rating' => 'Rating',
 	'ac_num' => 'Accepted',

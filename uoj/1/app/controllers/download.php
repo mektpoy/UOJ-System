@@ -7,24 +7,24 @@
 			}
 			
 			$visible = isProblemVisibleToUser($problem, $myUser);
-			if (!$visible && $myUser != null) {
-				$result = DB::query("select contest_id from contests_problems where problem_id = {$_GET['id']}");
-				while (list($contest_id) = DB::fetch($result, MYSQLI_NUM)) {
-					$contest = queryContest($contest_id);
-					genMoreContestInfo($contest);
-					if ($contest['cur_progress'] != CONTEST_NOT_STARTED && hasRegistered($myUser, $contest) && queryContestProblemRank($contest, $problem)) {
-						$visible = true;
-					}
-				}
-			}
+			// if (!$visible && $myUser != null) {
+			// 	$result = DB::query("select contest_id from contests_problems where problem_id = {$_GET['id']}");
+			// 	while (list($contest_id) = DB::fetch($result, MYSQLI_NUM)) {
+			// 		$contest = queryContest($contest_id);
+			// 		genMoreContestInfo($contest);
+			// 		if ($contest['cur_progress'] != CONTEST_NOT_STARTED && hasRegistered($myUser, $contest) && queryContestProblemRank($contest, $problem)) {
+			// 			$visible = true;
+			// 		}
+			// 	}
+			// }
 			if (!$visible) {
 				become404Page();
 			}
 
 			$id = $_GET['id'];
 			
-			$file_name = "/var/uoj_data/$id/download.zip";
-			$download_name = "problem_$id.zip";
+			$file_name = "/var/uoj_data/$id.zip";
+			$download_name = "$id.zip";
 			break;
 		case 'testlib.h':
 			$file_name = "/home/local_main_judger/judge_client/uoj_judger/include/testlib.h";

@@ -179,11 +179,10 @@ function queryContestData($contest, $config = array()) {
 		$people[] = $row;
 	}
 	foreach ($people as $k => $person) {
-		$result = DB::query("select school, grade, real_name from user_info where username = \"{$person[0]}\"");
+		$result = DB::query("select school, real_name from user_info where username = \"{$person[0]}\"");
 		while ($row = DB::fetch($result, MYSQLI_NUM)) {
 			$people[$k][] = $row[0];
 			$people[$k][] = $row[1];
-			$people[$k][] = $row[2];
 		}
 	}
 
