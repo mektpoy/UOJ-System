@@ -1128,7 +1128,7 @@ function showStandings() {
             '<th style="width:5em">'+uojLocale('name')+'</th>' +
 			'<th style="width:5em">'+uojLocale('contests::total score')+'</th>' +
 			$.map(problems, function(col, idx) {
-				return '<th style="width:8em;">' + '<a href="/contest/' + contest_id + '/problem/' + col + '">' + String.fromCharCode('A'.charCodeAt(0) + idx) + '</a>' + '</th>';
+				return '<th style="width:5em;">' + '<a href="/contest/' + contest_id + '/problem/' + col + '">' + String.fromCharCode('A'.charCodeAt(0) + idx) + '</a>' + '</th>';
 			}).join('') +
 		'</tr>',
 		function(row) {
