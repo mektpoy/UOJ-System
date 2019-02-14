@@ -48,6 +48,7 @@ return [
 	'visit his blog' => function($name) {
 		return "访问 $name 的博客";
 	},
+	'visit his submissions' => "查看他的提交记录",
 	'rating changes' => 'Rating 变化',
 	'accepted problems' => 'AC 过的题目',
 	'n problems in total' => function($n) {

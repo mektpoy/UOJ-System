@@ -49,6 +49,7 @@ return [
 	'visit his blog' => function($name) {
 		return "Visit $name's blog";
 	},
+	'visit his submissions' => "Visit his submissions",
 	'rating changes' => 'Rating changes',
 	'accepted problems' => 'Accepted problems',
 	'n problems in total' => function($n) {

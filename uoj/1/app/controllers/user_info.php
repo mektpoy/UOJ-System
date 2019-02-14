@@ -82,11 +82,14 @@
 			<?php if (Auth::id() != $user['username']): ?>
 			<a type="button" class="btn btn-info btn-sm" href="/user/msg?enter=<?= $user['username'] ?>"><span class="glyphicon glyphicon-envelope"></span> <?= UOJLocale::get('send private message') ?></a>
 			<?php else: ?>
+				
 			<a type="button" class="btn btn-info btn-sm" href="/user/modify-profile"><span class="glyphicon glyphicon-pencil"></span> <?= UOJLocale::get('modify my profile') ?></a>
 			<?php endif ?>
 			<?php endif ?>
 			
 			<a type="button" class="btn btn-success btn-sm" href="<?= HTML::blog_url($user['username'], '/') ?>"><span class="glyphicon glyphicon-arrow-right"></span> <?= UOJLocale::get('visit his blog', $username) ?></a>
+
+			<a type="button" class="btn btn-warning btn-sm" href="<?= HTML::submission_url($user['username']) ?>"><span class="glyphicon glyphicon-arrow-right"></span> <?= UOJLocale::get('visit his submissions', $username) ?></a>
 			
 			<div class="top-buffer-lg"></div>
 			<div class="list-group">

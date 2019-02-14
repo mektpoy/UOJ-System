@@ -52,6 +52,10 @@ class HTML {
 		$url = rtrim($url, '/');
 		return HTML::escape($url);
 	}
+
+	public static function submission_url($username) {
+		return '/submissions?submitter='.$username;
+	}
 	
 	public static function url($uri, $config = array()) {
 		$config = array_merge(array(
